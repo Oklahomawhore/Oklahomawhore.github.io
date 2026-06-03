@@ -1,1 +1,495 @@
-Hello world
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wangshu Zhu — AI Researcher</title>
+    <meta name="description" content="Wangshu Zhu — AI Researcher at Shanghai Jiao Tong University. LLM Training, Reasoning, Evaluation, and Agent.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'star': {
+                            50: '#fef9ee',
+                            100: '#fdf0d4',
+                            200: '#fadfa3',
+                            300: '#f5c865',
+                            400: '#f1b030',
+                            500: '#ed9e18',
+                            600: '#d67f0a',
+                            700: '#b16106',
+                            800: '#8f4c0a',
+                            900: '#753d0c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeInUp 0.6s ease forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .float { animation: float 4s ease-in-out infinite; }
+        .gradient-text {
+            background: linear-gradient(135deg, #f1b030, #ed9e18, #d67f0a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.25);
+        }
+        .tag {
+            transition: all 0.2s ease;
+        }
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        .link-underline {
+            position: relative;
+        }
+        .link-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #f1b030, #ed9e18);
+            transition: width 0.3s ease;
+        }
+        .link-underline:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a0f] text-gray-100 font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="font-bold text-lg">
+                <span class="gradient-text">W</span><span class="text-gray-300">.Zhu</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="text-gray-400 hover:text-white transition link-underline">About</a>
+                <a href="#publications" class="text-gray-400 hover:text-white transition link-underline">Publications</a>
+                <a href="#projects" class="text-gray-400 hover:text-white transition link-underline">Projects</a>
+                <a href="#blog" class="text-gray-400 hover:text-white transition link-underline">Blog</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="https://github.com/Oklahomawhore" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition text-gray-400 hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="mailto:wangshuzhu@sjtu.edu.cn" class="px-4 py-2 rounded-lg bg-star-500/10 border border-star-500/30 hover:bg-star-500/20 transition text-star-400 text-sm font-medium">
+                    Contact
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center px-6 pt-20">
+        <div class="max-w-4xl mx-auto text-center">
+            <!-- Avatar -->
+            <div class="animate-in mb-8 float">
+                <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-star-400 via-star-500 to-star-600 p-1">
+                    <div class="w-full h-full rounded-full bg-[#0a0a0f] flex items-center justify-center">
+                        <span class="text-4xl font-bold gradient-text">WZ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Name & Title -->
+            <h1 class="animate-in delay-1 text-5xl md:text-6xl font-bold mb-4">
+                <span class="text-white">Wangshu</span> <span class="gradient-text">Zhu</span>
+            </h1>
+            <p class="animate-in delay-2 text-xl md:text-2xl text-gray-400 mb-3">
+                AI Researcher · Shanghai Jiao Tong University
+            </p>
+            <p class="animate-in delay-2 text-base text-gray-500 mb-8 max-w-xl mx-auto">
+                PhD Graduate · Researching <span class="text-gray-300">LLM Training, Reasoning, Evaluation & Agent</span>
+            </p>
+
+            <!-- Research Interests -->
+            <div class="animate-in delay-3 flex flex-wrap justify-center gap-2 mb-12">
+                <span class="px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm">LLM Training</span>
+                <span class="px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm">LLM Reasoning</span>
+                <span class="px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-300 text-sm">LLM Evaluation</span>
+                <span class="px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-300 text-sm">AI Agent</span>
+                <span class="px-3 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-sm">Reward-Free RL</span>
+            </div>
+
+            <!-- Social Links -->
+            <div class="animate-in delay-4 flex justify-center gap-4">
+                <a href="https://github.com/Oklahomawhore" target="_blank" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition group">
+                    <svg class="w-6 h-6 text-gray-400 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://scholar.google.com" target="_blank" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition group">
+                    <svg class="w-6 h-6 text-gray-400 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5l4.838 3.94A8 8 0 0112 9a8 8 0 017.162 4.44L24 9.5z"/></svg>
+                </a>
+                <a href="https://x.com" target="_blank" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition group">
+                    <svg class="w-6 h-6 text-gray-400 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="mt-20 animate-bounce">
+                <svg class="w-6 h-6 mx-auto text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span class="gradient-text">About</span> <span class="text-white">Me</span>
+            </h2>
+            <div class="grid md:grid-cols-5 gap-12">
+                <div class="md:col-span-3 space-y-4 text-gray-300 leading-relaxed">
+                    <p>
+                        I'm a PhD graduate from <strong class="text-white">Shanghai Jiao Tong University</strong>, ranked 
+                        <strong class="text-star-400">15/110</strong> in my cohort. My research sits at the intersection of 
+                        large language models and autonomous agents.
+                    </p>
+                    <p>
+                        I've interned at <strong class="text-white">HelloBike AI Lab</strong> and 
+                        <strong class="text-white">Intelligence Innovation Lab (ICC)</strong>, working on production ML systems 
+                        at scale. I hold a patent (<a href="https://patents.google.com/patent/CN119623579A" target="_blank" class="text-star-400 hover:underline">CN119623579A</a>) 
+                        in AI applications.
+                    </p>
+                    <p>
+                        Beyond research, I'm an active contributor to open-source AI projects and maintain several 
+                        repositories spanning reinforcement learning, LLM evaluation, and crypto trading strategies.
+                    </p>
+                    <div class="pt-4">
+                        <p class="text-sm text-gray-500 mb-3">Currently exploring:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-gray-400">Multi-Agent Systems</span>
+                            <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-gray-400">Reward-Free RL</span>
+                            <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-gray-400">Agent Safety</span>
+                            <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-gray-400">DeFi Agent</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-2">
+                    <div class="bg-white/5 rounded-2xl p-6 border border-white/10">
+                        <h3 class="font-semibold mb-4 text-white">Quick Facts</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-center gap-3">
+                                <span class="text-star-400">📍</span>
+                                <span class="text-gray-400">Shanghai, China</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="text-star-400">🎓</span>
+                                <span class="text-gray-400">PhD, SJTU (Rank 15/110)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="text-star-400">💼</span>
+                                <span class="text-gray-400">HelloBike, ICC</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="text-star-400">📧</span>
+                                <a href="mailto:wangshuzhu@sjtu.edu.cn" class="text-gray-400 hover:text-white transition">wangshuzhu@sjtu.edu.cn</a>
+                            </li>
+                        </ul>
+                        <div class="mt-6 pt-6 border-t border-white/10">
+                            <p class="text-xs text-gray-500 mb-2">CV Download</p>
+                            <a href="#" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-star-500/10 border border-star-500/20 hover:bg-star-500/20 transition text-star-400 text-sm font-medium">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                Resume (PDF)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="py-24 px-6 bg-white/[0.02]">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span class="gradient-text">Publications</span> <span class="text-white">& Patents</span>
+            </h2>
+            <div class="space-y-6">
+                <!-- Publication 1 -->
+                <div class="card-hover bg-white/5 rounded-2xl p-6 border border-white/10">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-amber-500/20 text-amber-300 border border-amber-500/30">ICLR 2026</span>
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-green-500/20 text-green-300 border border-green-500/30">Under Review</span>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-1">Causal-Invariant Skills for General RL Agents</h3>
+                            <p class="text-gray-400 text-sm mb-3">World-Driven Skill Learning: Reward-free RL agent training via causal invariance metrics</p>
+                            <div class="flex flex-wrap items-center gap-2 text-sm">
+                                <span class="text-gray-500">Oklahomawhore</span>
+                                <span class="text-gray-600">·</span>
+                                <span class="text-gray-500">et al.</span>
+                                <span class="text-gray-600">·</span>
+                                <a href="https://github.com/Oklahomawhore/causal-invariant-skills" target="_blank" class="text-star-400 hover:underline flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                                    Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="hidden md:block">
+                            <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/20 flex items-center justify-center">
+                                <span class="text-2xl">🎓</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patent -->
+                <div class="card-hover bg-white/5 rounded-2xl p-6 border border-white/10">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-blue-500/20 text-blue-300 border border-blue-500/30">Patent</span>
+                                <span class="px-2 py-0.5 rounded text-xs font-medium bg-green-500/20 text-green-300 border border-green-500/30">Granted</span>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-1">CN119623579A — AI Application System</h3>
+                            <p class="text-gray-400 text-sm mb-3">Chinese Patent — Machine Learning Application</p>
+                            <a href="https://patents.google.com/patent/CN119623579A" target="_blank" class="inline-flex items-center gap-2 text-star-400 hover:underline text-sm">
+                                View on Google Patents
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </div>
+                        <div class="hidden md:block">
+                            <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-500/20 flex items-center justify-center">
+                                <span class="text-2xl">📜</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-4 text-center">
+                <span class="gradient-text">Featured</span> <span class="text-white">Projects</span>
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-xl mx-auto">Selected open-source projects I'm proud of</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Project 1: Animal Watch -->
+                <div class="card-hover bg-white/5 rounded-2xl p-6 border border-white/10">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/20 flex items-center justify-center">
+                            <span class="text-xl">🦌</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white">Animal-Watch</h3>
+                            <p class="text-xs text-gray-500">Production</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">
+                        林麝动物监测小程序 — Wildlife monitoring WeChat mini-program with AI recognition. 
+                        Real-time detection, patrol management, and data analytics.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-0.5 rounded text-xs bg-green-500/10 text-green-400 border border-green-500/20">Python</span>
+                        <span class="px-2 py-0.5 rounded text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20">Flask</span>
+                        <span class="px-2 py-0.5 rounded text-xs bg-orange-500/10 text-orange-400 border border-orange-500/20">Vue</span>
+                        <span class="px-2 py-0.5 rounded text-xs bg-purple-500/10 text-purple-400 border border-purple-500/20">CV</span>
+                    </div>
+                    <a href="https://github.com/Oklahomawhore/animal-watch" target="_blank" class="inline-flex items-center gap-2 text-star-400 hover:underline text-sm">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                        View on GitHub
+                    </a>
+                </div>
+
+                <!-- Project 2: PaSa-Think -->
+                <div class="card-hover bg-white/5 rounded-2xl p-6 border border-white/10">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/20 flex items-center justify-center">
+                            <span class="text-xl">📚</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white">PaSa-Think</h3>
+                            <p class="text-xs text-gray-500">Research</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Academic paper pipeline — Daily arXiv paper discovery with automated summary generation. 
+                        Delivers curated AI research to WeChat mini-program.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-0.5 rounded text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20">arXiv</span>
+                        <span class="px-2 py-0.5 rounded text-xs bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">LLM</span>
+                        <span class="px-2 py-0.5 rounded text-xs bg-red-500/10 text-red-400 border border-red-500/20">Pipeline</span>
+                    </div>
+                    <a href="https://github.com/Oklahomawhore/pasa-think" target="_blank" class="inline-flex items-center gap-2 text-star-400 hover:underline text-sm">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                        View on GitHub
+                    </a>
+                </div>
+
+                <!-- Project 3: Prohibition-Bench -->
+                <div class="card-hover bg-white/5 rounded-2xl p-6 border border-white/10">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-red-500/20 flex items-center justify-center">
+                            <span class="text-xl">🛡️</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white">Prohibition-Bench</h3>
+                            <p class="text-xs text-gray-500">Research</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">
+                        LLM Safety Benchmark — Measuring the impact of prohibition instructions on LLM behavior. 
+                        Multi-model evaluation framework with automated red-teaming.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-0.5 rounded text-xs bg-red-500/10 text-red-400 border border-red-500/20">Safety</span>
+                        <span class="px-2 py-0.5 rounded text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20">Benchmark</span>
+                        <span class="px-2 py-0.5 rounded text-xs bg-purple-500/10 text-purple-400 border border-purple-500/20">Red-Teaming</span>
+                    </div>
+                    <a href="https://github.com/Oklahomawhore/prohibition-bench" target="_blank" class="inline-flex items-center gap-2 text-star-400 hover:underline text-sm">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                        View on GitHub
+                    </a>
+                </div>
+
+                <!-- Project 4: Crypto Strategy -->
+                <div class="card-hover bg-white/5 rounded-2xl p-6 border border-white/10">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-amber-500/20 border border-yellow-500/20 flex items-center justify-center">
+                            <span class="text-xl">📈</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white">crypto-strategy</h3>
+                            <p class="text-xs text-gray-500">Side Project</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Crypto perpetual futures trading bot — Momentum reversal strategy with martingale position sizing. 
+                        Live trading scripts for Binance futures.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-0.5 rounded text-xs bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Binance</span>
+                        <span class="px-2 py-0.5 rounded text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20">Python</span>
+                        <span class="px-2 py-0.5 rounded text-xs bg-green-500/10 text-green-400 border border-green-500/20">Trading</span>
+                    </div>
+                    <a href="https://github.com/Oklahomawhore/crypto-strategy" target="_blank" class="inline-flex items-center gap-2 text-star-400 hover:underline text-sm">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+
+            <!-- More Projects -->
+            <div class="mt-8 text-center">
+                <a href="https://github.com/Oklahomawhore?tab=repositories" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition text-gray-300 font-medium">
+                    View All Repositories on GitHub
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-24 px-6 bg-white/[0.02]">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-4 text-center">
+                <span class="gradient-text">Blog</span> <span class="text-white">& Notes</span>
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-xl mx-auto">Technical posts on AI, ML, and everything in between</p>
+
+            <div class="space-y-4">
+                <!-- Blog Post 1 -->
+                <a href="#" class="block card-hover bg-white/5 rounded-xl p-5 border border-white/10 group">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2 py-0.5 rounded text-xs bg-purple-500/10 text-purple-400 border border-purple-500/20">LLM</span>
+                        <span class="text-xs text-gray-500">2026.05</span>
+                    </div>
+                    <h3 class="font-medium text-white group-hover:text-star-400 transition mb-1">On the Reproducibility Crisis in RLHF Research</h3>
+                    <p class="text-sm text-gray-500">Why most RLHF papers fail to reproduce, and what we can do about it...</p>
+                </a>
+
+                <!-- Blog Post 2 -->
+                <a href="#" class="block card-hover bg-white/5 rounded-xl p-5 border border-white/10 group">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2 py-0.5 rounded text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20">Tutorial</span>
+                        <span class="text-xs text-gray-500">2026.04</span>
+                    </div>
+                    <h3 class="font-medium text-white group-hover:text-star-400 transition mb-1">Setting Up a Multi-GPU Training Rig for Under $5k</h3>
+                    <p class="text-sm text-gray-500">Hardware recommendations, NCCL troubleshooting, and PyTorch distributed training guide...</p>
+                </a>
+
+                <!-- Blog Post 3 -->
+                <a href="#" class="block card-hover bg-white/5 rounded-xl p-5 border border-white/10 group">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2 py-0.5 rounded text-xs bg-green-500/10 text-green-400 border border-green-500/20">Trading</span>
+                        <span class="text-xs text-gray-500">2026.03</span>
+                    </div>
+                    <h3 class="font-medium text-white group-hover:text-star-400 transition mb-1">Building a Crypto Trading Bot: Lessons from 6 Months of Live Trading</h3>
+                    <p class="text-sm text-gray-500">What worked, what didn't, and why martingale is both terrifying and fascinating...</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/5">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="text-gray-500 text-sm">Built with ❤️ by Wangshu Zhu</span>
+            </div>
+            <div class="flex items-center gap-6 text-sm text-gray-500">
+                <a href="https://github.com/Oklahomawhore" target="_blank" class="hover:text-white transition">GitHub</a>
+                <a href="https://x.com" target="_blank" class="hover:text-white transition">Twitter</a>
+                <a href="mailto:wangshuzhu@sjtu.edu.cn" class="hover:text-white transition">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
